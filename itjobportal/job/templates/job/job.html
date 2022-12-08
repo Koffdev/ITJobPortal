@@ -1,0 +1,44 @@
+{% extends 'job/base.html' %}
+
+{% block content %}
+    <div class="pl-6">
+        <div>
+            <h1 class="subtitle is-5"><strong>{{ job.title }}</strong> | {{ job.category }}</h1>
+        </div>
+
+        <hr>
+        <div class="columns">
+            <div class="column is-two-thirds">
+                <div class="columns">
+                    <div class="column is-one-third">
+                        <p class="has-text-weight-semibold">Key skills:</p>
+                        <p>{{ job.key_skills }}</p>
+                    </div>
+
+                    <div class="column is-one-third">
+                        <p class="has-text-weight-semibold">Company:</p>
+                        <p>{{ job.company_name }} | {{ job.company_country }}</p>
+                    </div>
+
+                    <div class="column is-one-third">
+                        <p class="has-text-weight-semibold">Created at:</p>
+                        <p>{{ job.created_at }}</p>
+                    </div>
+                </div>
+
+
+                <div class="columns">
+                    <div class="column">
+                        <p class="has-text-weight-semibold">Discription:</p>
+                        <p>{{ job.description }}</p>
+                    </div>    
+                </div>
+            </div>
+        </div>
+            <form action="{% url 'apply-job' job.id %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="job" value="{{ job.id }}">
+                <button class="button is-primary" type="submit">Send request</button>
+            </form>
+    </div>
+{% endblock %}

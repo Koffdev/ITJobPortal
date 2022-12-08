@@ -1,0 +1,16 @@
+{% extends 'job/base.html' %}
+
+{% block content %}
+    <p class="subtitle is-4 has-text-weight-bold has-text-centered"><bold>PROFILE</bold></p>
+    <div class="mb-6">
+        <strong>Name: </strong>{% if request.user.get_full_name %}{{ request.user.get_full_name }}{% endif %}<br>       
+        <strong>Username: </strong>{% if request.user.username %}{{ request.user.username }}{% endif %}<br>          
+        <strong>E-mail: </strong>{% if request.user.email %}{{ request.user.email }}{% endif %}<br><br>
+
+        <strong>Location: </strong>{% if request.user.profile.location %}{{ request.user.profile.location }}{% endif %}<br>
+        <strong>Skills: </strong>{% if request.user.profile.skills %}{{ request.user.profile.skills }}{% endif %}<br>        
+        <strong>Linkedin: </strong>{% if request.user.profile.linkedin %} <a href="{{ request.user.profile.linkedin }}">Linkedin</a>{% endif %}<br>        
+
+        <a href="{% url 'edit-profile' %}" class="button mt-4 is-primary">Edit information</a>
+    </div>
+{% endblock %}

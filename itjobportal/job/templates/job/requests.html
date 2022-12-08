@@ -1,0 +1,34 @@
+{% extends 'job/base.html' %}
+
+{% block content %}
+    <p class="subtitle is-4 has-text-weight-bold has-text-centered"><bold>REQUESTS</bold></p>
+
+    {% if request.user.user_requests.all %}
+        {% for app in request.user.user_requests.all %}
+            <div class="box has-background-white-ter">
+                <div class="columns is-centered is-vcentered is-mobile">
+                    <div class="column is-four-fifths">
+                        <p>
+                            <strong>{{ app.job.title }}</strong>{{ app.status }}
+                            <br>
+                            <small>{{ app.job.company_name }}</small> <small> | {{ app.job.company_country }}</small>
+                            <br>
+                            {{ app.job.key_skills }}
+                        </p>
+                    </div>
+                    <div class="column ">
+                        Status: 
+                        <p class="{% if app.status == 'adopted' %} has-text-success {% elif app.status == 'approved' %} has-text-danger {% endif %}">{{ app.status }}</p>
+                    </div>
+                    <div class="column">
+                        <button class="button is-danger" type="submit">Remove</button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="pt-6 is-size-4">
+            Oops, there are no requests yet... 
+        </p>
+    {% endif %}
+{% endblock %}

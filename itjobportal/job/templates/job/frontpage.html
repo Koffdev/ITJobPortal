@@ -1,0 +1,49 @@
+{% extends 'job/base.html' %}
+
+{% block content %}
+    <p class="subtitle is-4 has-text-weight-bold has-text-centered">WELCOME TO <bold>IT JOB PORTAL</bold></p>
+
+    <div class="tabs is-centered is-medium">
+        <ul>
+                </li><a href="{% url 'frontpage' %}">All</a>
+            {% for category in categories %}
+                </li><a href="{% url 'frontpage' %}?category={{ category.slug }}">{{ category.title }}</a></li>
+            {% endfor %}
+            
+        </ul>
+        </div>
+
+    <div class="columns is-mobile is-multiline">
+        {% if jobs %}
+            {% for job in jobs %}
+                <div class="column is-4">
+                    <div class="card has-background-white-ter">
+                        <div class="card-content">
+
+                            <div class="media">
+                                <div class="media-content">
+                                    <p class="title has-text-centered is-5">{{ job.title }}</p>    
+                                </div>
+                            </div>
+
+                            <div class="content">        
+                                <p class="subtitle text-bold has-text-dark is-6"><bold>{{ job.key_skills }}</bold></p>
+                                <p class="subtitle text-bold is-6"><bold>{{ job.company_name }}</bold></p>
+                                <p class="subtitle is-6">Created at {{ job.created_at }}</p>
+                            </div>
+
+                            <div class="content">
+                                <a href="{% url 'job' job.slug %}" class="button is-fullwidth is-outlined is-dark">View</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="has-text-centered pt-6 is-size-4">
+                    Oops, there are no jobs of such category... 
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}

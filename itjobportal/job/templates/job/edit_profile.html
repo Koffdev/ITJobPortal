@@ -1,0 +1,66 @@
+{% extends 'job/base.html' %}
+
+{% block content %}
+    <div class="hero is-halfheight">
+        <div class="hero-body is-justify-content-center is-align-items-center">
+            <div class="box has-background-white-ter">
+                <div class="has-text-centered">
+                    <p class="is-size-4">
+                        Edit information
+                    </p>
+                </div>
+
+                <form method="post" action="." class="space-y-3">
+                    {% csrf_token %}
+                    <div class="columns is-centered is-vcentered is-mobile">                       
+                        <div class="column">
+                            <div>
+                                <label>Username</label>
+                                <input name="username" value="{{ request.user.username }}" type="text" class="input is-dark has-background-white-ter">
+                            </div>
+                            
+                            <div>
+                                <label>First name</label>
+                                <input name="first_name" value="{{ request.user.first_name }}" type="text" class="input is-dark has-background-white-ter">
+                            </div>
+
+                            <div>
+                                <label>Last name</label>
+                                <input name="last_name" value="{{ request.user.last_name }}" type="text" class="input is-dark has-background-white-ter">
+                            </div>
+
+                            <div>
+                                <label>E-mail</label>
+                                <input name="email" value="{{ request.user.email }}" type="email" class="input is-dark has-background-white-ter">
+                            </div>
+                        </div>
+
+                        <div class="column">
+                            
+                            <div>
+                                <label>Location</label>
+                                <input name="location" value="{{ request.user.profile.location }}" type="text" class="input is-dark has-background-white-ter">
+                            </div>
+
+                            <div>
+                                <label>Skills</label>  
+                                <textarea cols="50" rows="40" name="skills" value="{{ request.user.profile.skills }}" class="input is-dark has-background-white-ter"></textarea>
+                            </div>
+
+                            <div>
+                                <label>Linkedin URL</label>
+                                <input name="linkedin" value="{{ request.user.profile.linkedin }}" type="text" class="input is-dark has-background-white-ter">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="has-text-centered">
+                        <button class="button is-primary is-fullwidth" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
